@@ -35,12 +35,16 @@ namespace DotNetPersonApi.Controllers
             }
         }
 
-        [HttpPut, Route("person")]
-        public async Task<IActionResult> UpdatePerson([FromBody, Required]Person person)
+        [HttpPut, Route("person/{id}")]
+        public async Task<IActionResult> UpdatePerson([FromBody, Required]Person person, [FromRoute,  Required] int id)
         {
             try
             {
-                Person updatedPerson = await _personRepository.EditPerson(person);
+                Person updatedPerson = await _personRepository.EditPerson(person, id);
+                if (updatedPerson == null)
+                {
+                    return NotFound($"No person with the id {id} exists.");
+                }
                 return Ok(updatedPerson);
             }
             catch (Exception e)
@@ -56,6 +60,10 @@ namespace DotNetPersonApi.Controllers
             try
             {
                 Person deletedPerson = await _personRepository.DeletePerson(id);
+                if(deletedPerson == null)
+                {
+                    return NotFound($"No person with the id {id} exists.");
+                }
                 return Ok(deletedPerson);
             }
             catch(Exception e)

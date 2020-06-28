@@ -1,4 +1,5 @@
 ﻿using DotNetPersonApi.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,29 +9,58 @@ namespace DotNetPersonApi.Service
 {
     public class PersonRepository : IPersonRepository
     {
+        private readonly PersonContext _personContext;
+
+        public PersonRepository(PersonContext personContext)
+        {
+            _personContext = personContext;
+        }
+
         public async Task<Person> AddPerson(Person person)
         {
-            throw new NotImplementedException();
+            var addedPerson = await _personContext.Persons.AddAsync(person);
+            _personContext.SaveChanges();
+            return addedPerson.Entity;
         }
 
         public async Task<Person> DeletePerson(int id)
         {
-            throw new NotImplementedException();
+            Person personToDelete = await _personContext.Persons.FindAsync(id);
+            if(personToDelete != null)
+            {
+                _personContext.Persons.Attach(personToDelete);
+                _personContext.Persons.Remove(personToDelete);
+                _personContext.SaveChanges();
+            }
+            return personToDelete;
         }
 
-        public async Task<Person> EditPerson(Person person)
+        public async Task<Person> EditPerson(Person person, int id)
         {
-            throw new NotImplementedException();
+            Person personToUpdate = await _personContext.Persons.FindAsync(id);
+            if(personToUpdate != null)
+            {
+                personToUpdate = UpdatePersonEntity(personToUpdate, person);
+                _personContext.SaveChanges();
+            }
+            return personToUpdate;
         }
 
-        public Task<Person> GetPerons()
+        public async Task<List<Person>> GetPerons()
         {
-            throw new NotImplementedException();
+            return await _personContext.Persons.ToListAsync<Person>();
         }
 
         public async Task<long> GetPersonCount()
         {
-            throw new NotImplementedException();
+            return await _personContext.Persons.LongCountAsync<Person>();
+        }
+
+        private Person UpdatePersonEntity(Person personToUpdate, Person updatedPerson)
+        {
+            personToUpdate.FirstName = updatedPerson.FirstName;
+            personToUpdate.LastName = updatedPerson.LastName;
+            return personToUpdate;
         }
     }
 }

@@ -6,6 +6,7 @@ using DotNetPersonApi.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -20,6 +21,7 @@ namespace DotNetPersonApi
             services.AddControllers();
 
             services.AddTransient<IPersonRepository, PersonRepository>();
+            services.AddDbContext<PersonContext>(options => options.UseInMemoryDatabase("Persons"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,12 +10,12 @@ namespace DotNetPersonApi.Service
     {
         Task<Person> AddPerson(Person person);
 
-        Task<Person> EditPerson(Person person);
+        Task<Person> EditPerson(Person person, int id);
 
         Task<Person> DeletePerson(int id);
 
         Task<long> GetPersonCount();
 
-        Task<Person> GetPerons();
+        Task<List<Person>> GetPerons();
     }
 }
