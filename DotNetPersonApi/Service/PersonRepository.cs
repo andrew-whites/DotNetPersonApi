@@ -18,6 +18,7 @@ namespace DotNetPersonApi.Service
 
         public async Task<Person> AddPerson(Person person)
         {
+            person.Id = 0;
             var addedPerson = await _personContext.Persons.AddAsync(person);
             _personContext.SaveChanges();
             return addedPerson.Entity;
