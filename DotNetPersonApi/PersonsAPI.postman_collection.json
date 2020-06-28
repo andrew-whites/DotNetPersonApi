@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "6a2f7bac-bd36-49a1-830e-da4164908071",
+		"name": "PersonsAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetPersons",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44312/api/v1/persons/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"v1",
+						"persons",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePerson",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 69,\r\n    \"firstName\": \"Miku\",\r\n    \"lastName\": \"Hatsune\"\r\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44312/api/v1/persons/person/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"v1",
+						"persons",
+						"person",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPersonsCount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44312/api/v1/persons/count",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"v1",
+						"persons",
+						"count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddPerson",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Noe\"\r\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44312/api/v1/persons/person",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"v1",
+						"persons",
+						"person"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddPersons",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"firstName\": \"John\",\r\n        \"lastName\": \"Noe\"\r\n    },\r\n    {\r\n        \"firstName\": \"John\",\r\n        \"lastName\": \"Doe\"\r\n    },\r\n    {\r\n        \"firstName\": \"John\",\r\n        \"lastName\": \"Noe\"\r\n    }\r\n]"
+				},
+				"url": {
+					"raw": "https://localhost:44312/api/v1/persons",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"v1",
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletePerson",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44312/api/v1/persons/person/5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"v1",
+						"persons",
+						"person",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
