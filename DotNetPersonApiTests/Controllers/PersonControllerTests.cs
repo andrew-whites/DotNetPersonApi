@@ -215,6 +215,43 @@ namespace DotNetPersonApiTests.Controllers
             await _personController.DeletePerson(person3.Id);
         }
 
+        [TestMethod]
+        public async Task AddingPersonsAddsAllPersons()
+        {
+            List<Person> personsToAdd = new List<Person>()
+            {
+               new Person
+                {
+                    FirstName = "John",
+                    LastName = "Doe"
+                },
+                new Person
+                {
+                    FirstName = "Mary",
+                    LastName = "Shelly"
+                },
+                new Person
+                {
+                    FirstName = "Patrick",
+                    LastName = "Bateman"
+                }
+            };
+
+            List<Person> listOfAddedPersons = GetValueFromOkObjectResult<List<Person>>(await _personController.AddPersons(personsToAdd) as OkObjectResult);
+
+            Assert.IsTrue(personsToAdd.Count == listOfAddedPersons.Count);
+
+            foreach(Person p in personsToAdd)
+            {
+                Assert.IsTrue(listOfAddedPersons.Contains(p));
+            }
+
+            foreach(Person p in listOfAddedPersons)
+            {
+                await _personController.DeletePerson(p.Id);
+            }
+        }
+
         private T GetValueFromOkObjectResult<T>(OkObjectResult actionResult)
         {
             return (T)actionResult.Value;

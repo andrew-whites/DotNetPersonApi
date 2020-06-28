@@ -57,6 +57,20 @@ namespace DotNetPersonApi.Service
             return await _personContext.Persons.LongCountAsync<Person>();
         }
 
+        public async Task<List<Person>> AddPersons(List<Person> persons)
+        {
+            List<Person> addedPersons = new List<Person>();
+
+            foreach(Person p in persons)
+            {
+                var addedPerson = await _personContext.Persons.AddAsync(p);
+                addedPersons.Add(addedPerson.Entity);
+            }
+
+            _personContext.SaveChanges();
+            return addedPersons;
+        }
+
         private Person UpdatePersonEntity(Person personToUpdate, Person updatedPerson)
         {
             personToUpdate.FirstName = updatedPerson.FirstName;

@@ -17,5 +17,7 @@ namespace DotNetPersonApi.Service
         Task<long> GetPersonCount();
 
         Task<List<Person>> GetPerons();
+
+        Task<List<Person>> AddPersons(List<Person> persons);
     }
 }

@@ -100,5 +100,19 @@ namespace DotNetPersonApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPersons([FromBody, Required] List<Person> persons)
+        {
+            try
+            {
+                return Ok(await _personRepository.AddPersons(persons));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
